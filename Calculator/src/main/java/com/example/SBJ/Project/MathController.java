@@ -1,5 +1,6 @@
 package com.example.SBJ.Project;
 
+import com.example.SBJ.Project.exceptions.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -17,7 +18,7 @@ public class MathController {
     ) throws Exception {
 
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
-            throw new Exception();
+            throw new UnsupportedMathOperationException("Please ser a numeric value!");
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
 
