@@ -1,4 +1,4 @@
-package com.example.SBJ.Project;
+package com.SBJ.Project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SbjProjectApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SbjProjectApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SbjProjectApplication.class, args);
+    }
 
 }

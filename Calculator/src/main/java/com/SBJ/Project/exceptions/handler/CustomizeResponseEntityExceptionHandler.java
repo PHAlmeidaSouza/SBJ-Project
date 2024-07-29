@@ -1,7 +1,7 @@
-package com.example.SBJ.Project.exceptions.handler;
+package com.SBJ.Project.exceptions.handler;
 
-import com.example.SBJ.Project.exceptions.ExceptionResponse;
-import com.example.SBJ.Project.exceptions.UnsupportedMathOperationException;
+import com.SBJ.Project.exceptions.ExceptionResponse;
+import com.SBJ.Project.exceptions.UnsupportedMathOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

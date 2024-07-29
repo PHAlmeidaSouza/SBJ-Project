@@ -1,4 +1,4 @@
-package com.example.SBJ.Project.exceptions;
+package com.SBJ.Project.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

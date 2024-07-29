@@ -1,26 +1,33 @@
-package com.example.SBJ.Project.controllers;
+package com.SBJ.Project.controllers;
 
-import com.example.SBJ.Project.converters.NumberConverter;
-import com.example.SBJ.Project.exceptions.UnsupportedMathOperationException;
-import com.example.SBJ.Project.math.SimpleMath;
-import org.springframework.web.bind.annotation.*;
+import com.SBJ.Project.models.Person;
+import com.SBJ.Project.services.PersonService;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
 
 @RestController
+@RequestMapping("/person")
 public class PersonController {
 
-    private final AtomicLong counter = new AtomicLong();
+    private final PersonService personService;
 
-    @RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
-    public Double sum(
-            @PathVariable(value = "numberOne") String numberOne,
-            @PathVariable(value = "numberTwo") String numberTwo
-    ) throws Exception {
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
-        if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw new UnsupportedMathOperationException("Please set a numeric value!");
-        return math.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
+    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Person find(@PathVariable(value = "id") String id) throws Exception {
+        return personService.findById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Person> findAll() {
+        return personService.findAll();
     }
 
 }

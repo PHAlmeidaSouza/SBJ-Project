@@ -1,4 +1,4 @@
-package com.example.SBJ.Project;
+package com.SBJ.Project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

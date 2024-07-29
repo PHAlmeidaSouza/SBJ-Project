@@ -1,4 +1,4 @@
-package com.example.SBJ.Project;
+package com.SBJ.Project;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
