@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class PersonService {
 
     private final AtomicLong counter = new AtomicLong();
-    private Logger logger = Logger.getLogger(PersonService.class.getName());
+    private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
     public List<Person> findAll() {
         List<Person> persons = new ArrayList<>();
@@ -25,21 +25,31 @@ public class PersonService {
     }
 
     public Person findById(String id) {
-
-        logger.info("Finding new by id: " + id);
-
+        logger.info("Finding by id: " + id);
         Person person = new Person();
         person.setId(counter.incrementAndGet());
         person.setFirstName("John");
         person.setLastName("Smith");
         person.setAddress("Uberlandia - Minas Gerais");
         person.setGender("Male");
-
         return person;
     }
 
-    private Person mockPerson(int i) {
+    public Person create(Person person) {
+        logger.info("Creating person: " + person);
+        return person;
+    }
 
+    public Person update(Person person) {
+        logger.info("Updating person: " + person);
+        return person;
+    }
+
+    public void delete(String id) {
+        logger.info("Deleting person: " + id);
+    }
+
+    private Person mockPerson(int i) {
         logger.info("Find all people!");
         Person person = new Person();
         person.setId(counter.incrementAndGet());
@@ -47,7 +57,6 @@ public class PersonService {
         person.setLastName("Person lastname " + i);
         person.setAddress("Some address " + i);
         person.setGender("Male");
-
         return person;
     }
 
