@@ -21,15 +21,12 @@ public class PersonService {
     }
 
     public List<Person> findAll() {
-
         logger.info("Find all people!");
-
         return personRepository.findAll();
     }
 
     public Person findById(Long id) {
         logger.info("Finding by id: " + id);
-
         return personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
     }
@@ -41,7 +38,6 @@ public class PersonService {
 
     public Person update(Person person) {
         logger.info("Updating person: " + person);
-
         var entity = personRepository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
 
@@ -55,7 +51,6 @@ public class PersonService {
 
     public void delete(Long id) {
         logger.info("Deleting person: " + id);
-
         var entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
 

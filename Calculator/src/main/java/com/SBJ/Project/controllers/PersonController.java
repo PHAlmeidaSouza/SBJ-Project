@@ -1,6 +1,6 @@
 package com.SBJ.Project.controllers;
 
-import com.SBJ.Project.models.Person;
+import com.SBJ.Project.data.vo.v1.PersonVO;
 import com.SBJ.Project.services.PersonService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,22 +19,22 @@ public class PersonController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
         return personService.findAll();
     }
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable(value = "id") Long id) throws Exception {
+    public PersonVO findById(@PathVariable(value = "id") Long id) throws Exception {
         return personService.findById(id);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Person create(@RequestBody Person person) {
+    public PersonVO create(@RequestBody PersonVO person) {
         return personService.create(person);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Person update(@RequestBody Person person) {
+    public PersonVO update(@RequestBody PersonVO person) {
         return personService.update(person);
     }
 
