@@ -1,5 +1,8 @@
 package com.SBJ.Project.data.vo.v1;
 
+import lombok.Data;
+
+@Data
 public class PersonVO {
 
     private Long id;

@@ -1,7 +1,9 @@
 package com.SBJ.Project.services;
 
 
+import com.SBJ.Project.data.vo.v1.PersonVO;
 import com.SBJ.Project.exceptions.ResourceNotFoundException;
+import com.SBJ.Project.mapper.DozerMapper;
 import com.SBJ.Project.models.Person;
 import com.SBJ.Project.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -20,23 +22,25 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
         logger.info("Find all people!");
-        return personRepository.findAll();
+        return DozerMapper.parseListObjects(personRepository.findAll(), PersonVO.class);
     }
 
-    public Person findById(Long id) {
+    public PersonVO findById(Long id) {
         logger.info("Finding by id: " + id);
-        return personRepository.findById(id)
+        var entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
+        return DozerMapper.parseObject(entity, PersonVO.class);
     }
 
-    public Person create(Person person) {
+    public PersonVO create(PersonVO person) {
         logger.info("Creating person: " + person);
-        return personRepository.save(person);
+        var entity = DozerMapper.parseObject(person, Person.class);
+        return DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
     }
 
-    public Person update(Person person) {
+    public PersonVO update(PersonVO person) {
         logger.info("Updating person: " + person);
         var entity = personRepository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
@@ -46,7 +50,7 @@ public class PersonService {
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return personRepository.save(person);
+        return DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
     }
 
     public void delete(Long id) {
