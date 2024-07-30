@@ -2,8 +2,10 @@ package com.SBJ.Project.services;
 
 
 import com.SBJ.Project.data.vo.v1.PersonVO;
+import com.SBJ.Project.data.vo.v2.PersonVOV2;
 import com.SBJ.Project.exceptions.ResourceNotFoundException;
 import com.SBJ.Project.mapper.DozerMapper;
+import com.SBJ.Project.mapper.custom.PersonMapper;
 import com.SBJ.Project.models.Person;
 import com.SBJ.Project.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,11 @@ public class PersonService {
     private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
     private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, PersonMapper personMapper) {
         this.personRepository = personRepository;
+        this.personMapper = personMapper;
     }
 
     public List<PersonVO> findAll() {
@@ -38,6 +42,12 @@ public class PersonService {
         logger.info("Creating person: " + person);
         var entity = DozerMapper.parseObject(person, Person.class);
         return DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 person) {
+        logger.info("Creating person: " + person);
+        var entity = personMapper.convertVoToEntity(person);
+        return personMapper.convertEntityToVo(personRepository.save(entity));
     }
 
     public PersonVO update(PersonVO person) {
