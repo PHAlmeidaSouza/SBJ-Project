@@ -53,6 +53,11 @@
 			<artifactId>flyway-database-postgresql</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
 		<!-- Spring Data JPA Starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
