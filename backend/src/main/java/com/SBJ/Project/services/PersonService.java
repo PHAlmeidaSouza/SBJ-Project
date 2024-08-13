@@ -33,8 +33,20 @@ public class PersonService {
 
     public List<PersonVO> findAll() {
         logger.info("Find all people!");
-        return DozerMapper.parseListObjects(personRepository.findAll(), PersonVO.class);
+
+        var persons = DozerMapper.parseListObjects(personRepository.findAll(), PersonVO.class);
+
+        persons.forEach(person -> {
+            try {
+                person.add(linkTo(methodOn(PersonController.class).findById(person.getKey())).withSelfRel());
+            } catch (Exception e) {
+                logger.warning("Error while adding HATEOAS link to person with ID: " + person.getKey());
+            }
+        });
+
+        return persons;
     }
+
 
     public PersonVO findById(Long id) throws Exception {
         logger.info("Finding by id: " + id);
@@ -45,20 +57,35 @@ public class PersonService {
         return vo;
     }
 
-    public PersonVO create(PersonVO person) {
+    public PersonVO create(PersonVO person) throws Exception {
         logger.info("Creating person: " + person);
+
         var entity = DozerMapper.parseObject(person, Person.class);
-        return DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
+        var savedEntity = personRepository.save(entity);
+
+        var personVO = DozerMapper.parseObject(savedEntity, PersonVO.class);
+
+        personVO.add(linkTo(methodOn(PersonController.class).findById(personVO.getKey())).withSelfRel());
+
+        return personVO;
     }
 
-    public PersonVOV2 createV2(PersonVOV2 person) {
+    public PersonVOV2 createV2(PersonVOV2 person) throws Exception {
         logger.info("Creating person: " + person);
+
         var entity = personMapper.convertVoToEntity(person);
-        return personMapper.convertEntityToVo(personRepository.save(entity));
+        var savedEntity = personRepository.save(entity);
+
+        var personVOV2 = personMapper.convertEntityToVo(savedEntity);
+
+        personVOV2.add(linkTo(methodOn(PersonController.class).findById(personVOV2.getKey())).withSelfRel());
+
+        return personVOV2;
     }
 
-    public PersonVO update(PersonVO person) {
+    public PersonVO update(PersonVO person) throws Exception {
         logger.info("Updating person: " + person);
+
         var entity = personRepository.findById(person.getKey())
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
 
@@ -67,8 +94,15 @@ public class PersonService {
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
+        var updatedEntity = personRepository.save(entity);
+
+        var updatedPersonVO = DozerMapper.parseObject(updatedEntity, PersonVO.class);
+
+        updatedPersonVO.add(linkTo(methodOn(PersonController.class).findById(updatedPersonVO.getKey())).withSelfRel());
+
+        return updatedPersonVO;
     }
+
 
     public void delete(Long id) {
         logger.info("Deleting person: " + id);
