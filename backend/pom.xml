@@ -36,6 +36,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- PostgreSQL JDBC Driver: JDBC Driver for PostgreSQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
