@@ -1,9 +1,14 @@
 package com.SBJ.Project.services;
 
 
+import com.SBJ.Project.controllers.PersonController;
 import com.SBJ.Project.data.vo.v1.PersonVO;
 import com.SBJ.Project.data.vo.v2.PersonVOV2;
 import com.SBJ.Project.exceptions.ResourceNotFoundException;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import com.SBJ.Project.mapper.DozerMapper;
 import com.SBJ.Project.mapper.custom.PersonMapper;
 import com.SBJ.Project.models.Person;
@@ -31,11 +36,13 @@ public class PersonService {
         return DozerMapper.parseListObjects(personRepository.findAll(), PersonVO.class);
     }
 
-    public PersonVO findById(Long id) {
+    public PersonVO findById(Long id) throws Exception {
         logger.info("Finding by id: " + id);
         var entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
-        return DozerMapper.parseObject(entity, PersonVO.class);
+        var vo = DozerMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+        return vo;
     }
 
     public PersonVO create(PersonVO person) {
@@ -52,7 +59,7 @@ public class PersonService {
 
     public PersonVO update(PersonVO person) {
         logger.info("Updating person: " + person);
-        var entity = personRepository.findById(person.getId())
+        var entity = personRepository.findById(person.getKey())
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
 
         entity.setFirstName(person.getFirstName());

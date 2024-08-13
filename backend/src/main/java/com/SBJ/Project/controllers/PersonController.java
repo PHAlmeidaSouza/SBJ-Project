@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("api/v1/person")
 public class PersonController {
 
     private final PersonService personService;
@@ -38,12 +38,12 @@ public class PersonController {
         return personService.create(person);
     }
 
-    @PostMapping(value = "/v2",
+    /*@PostMapping(value = "/v2",
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     public PersonVOV2 createV2(@RequestBody PersonVOV2 person) {
         return personService.createV2(person);
-    }
+    }*/
 
     @PutMapping(
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},

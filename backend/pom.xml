@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -22,56 +23,69 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring Boot Web Starter -->
+		<!-- Spring Boot Web Starter: Starter for building web, including RESTful, applications using Spring MVC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Spring Boot Test Starter -->
+		<!-- Spring Boot Test Starter: Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest, and Mockito -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- PostgreSQL JDBC Driver -->
+		<!-- PostgreSQL JDBC Driver: JDBC Driver for PostgreSQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Flyway Core for Database Migrations -->
+		<!-- Flyway Core: Version control for your database -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 
+		<!-- Flyway Database for PostgreSQL: Flyway database support for PostgreSQL -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-database-postgresql</artifactId>
 		</dependency>
 
+		<!-- Jackson Dataformat YAML: Support for reading and writing YAML encoded data using Jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
 
-		<!-- Spring Data JPA Starter -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
+		<!-- Spring Data JPA Starter: Starter for using Spring Data JPA with Hibernate -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- Dozer Mapper -->
+		<!-- Spring HATEOAS: Starter for building hypermedia-driven REST web services using Spring HATEOAS -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+
+		<!-- Dozer Mapper: A Java Bean to Java Bean mapper that recursively copies data from one object to another -->
 		<dependency>
 			<groupId>com.github.dozermapper</groupId>
 			<artifactId>dozer-core</artifactId>
 			<version>${dozer.version}</version>
 		</dependency>
 
-		<!-- Spring Boot DevTools -->
+		<!-- Spring Boot DevTools: Provides fast application restarts, LiveReload, and configurations for enhanced development experience -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -79,7 +93,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Lombok for reducing boilerplate code -->
+		<!-- Lombok: A Java library that automatically plugs into your editor and build tools, providing a simpler and cleaner way to write Java code -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -90,6 +104,7 @@
 
 	<build>
 		<plugins>
+			<!-- Spring Boot Maven Plugin: Provides support for packaging and running Spring Boot applications using Maven -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
