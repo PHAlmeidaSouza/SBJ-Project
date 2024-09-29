@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/SBJ_Project
-    username: postgres
-    password: R8$sP2KS
+    username: root
+    password: root
   jpa:
     hibernate:
       ddl-auto: none

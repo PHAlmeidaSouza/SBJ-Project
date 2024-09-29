@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres:13.4-buster
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=SBJ_Project
+    ports:
+      - 5432:5432
